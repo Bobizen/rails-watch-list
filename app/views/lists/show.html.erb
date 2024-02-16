@@ -1,0 +1,50 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://png.pngtree.com/background/20221201/original/pngtree-cinema-film-festival-movie-poster-background-picture-image_1973552.jpg);">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+<div class="container">
+  <div class="cards">
+    <% @bookmarks.each do |bk| %>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src=<%= bk.movie.poster_url %> alt="Card image movie">
+        <div class="card-body">
+          <h5 class="card-title"><%= bk.movie.title %></h5>
+          <p class="card-text"><%= bk.movie.overview %></p>
+          <a href="#" class="btn btn-primary"><%= bk.comment %></a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <h3 class="mt-2">Create a new bookmark</h3>
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.input :comment %>
+    <%= f.association :movie %>
+    <%= f.submit "Submit a new bookmark", class: "btn btn-primary" %>
+  <% end %>
+  <div class="d-flex justify-content-between">
+    <div class="card">
+      <% @reviews.each do |re| %>
+        <div class="notification">
+          <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+          <div class="notification-content">
+            <p><small><%= re.created_at %></small></p>
+            <p><%= re.comment %></p>
+          </div>
+
+          <div class="notification-actions">
+            <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
+            <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="card">
+      <%= simple_form_for [@list, @review] do |f| %>
+        <%= f.input :comment %>
+        <%= f.input :rating %>
+        <%= f.submit "Create a review", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

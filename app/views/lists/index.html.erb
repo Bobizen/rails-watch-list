@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Here is my lists</h1>
+  <%= link_to "Create a new list", new_list_path %>
+  <div class="cards">
+    <% @lists.each do |list| %>
+      <%= link_to list_path(list) do %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://st3.depositphotos.com/1064045/18818/i/450/depositphotos_188188474-stock-photo-unusual-cinema-concept-3d-illustration.jpg)">
+          <%= list.name %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
